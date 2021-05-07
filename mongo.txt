@@ -1,0 +1,828 @@
+> use myFirstDB
+switched to db myFirstDB
+> db.createCollection('estudiantes')
+{ "ok" : 1 }
+> db.estudiantes.insert({name:'Francisco', home_state:'Londres',lucky_number:4, birthday: {month:8,day:30,year:1994}})
+WriteResult({ "nInserted" : 1 })
+> db.estudiantes.insert({name:'Pablo', home_state:'Washington',lucky_number:2, birthday: {month:2,day:25,year:1995}})
+WriteResult({ "nInserted" : 1 })
+> db.estudiantes.insert({name:'Diego', home_state:'Washington',lucky_number:7, birthday: {month:4,day:5,year:1982}})
+WriteResult({ "nInserted" : 1 })
+> db.estudiantes.insert({name:'Maria', home_state:'Santiago',lucky_number:7, birthday: {month:8,day:3,year:1994}})
+WriteResult({ "nInserted" : 1 })
+> db.estudiantes.insert({name:'Consuelo', home_state:'Alabama',lucky_number:23, birthday: {month:12,day:8,year:1988}})
+WriteResult({ "nInserted" : 1 })
+> db.students.find().pretty()
+> db.studantes.find({}).pretty()
+> db.estudiantes.find().pretty()
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a5"),
+        "name" : "Francisco",
+        "home_state" : "Londres",
+        "lucky_number" : 4,
+        "birthday" : {
+                "month" : 8,
+                "day" : 30,
+                "year" : 1994
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a6"),
+        "name" : "Pablo",
+        "home_state" : "Washington",
+        "lucky_number" : 2,
+        "birthday" : {
+                "month" : 2,
+                "day" : 25,
+                "year" : 1995
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a7"),
+        "name" : "Diego",
+        "home_state" : "Washington",
+        "lucky_number" : 7,
+        "birthday" : {
+                "month" : 4,
+                "day" : 5,
+                "year" : 1982
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a8"),
+        "name" : "Maria",
+        "home_state" : "Santiago",
+        "lucky_number" : 7,
+        "birthday" : {
+                "month" : 8,
+                "day" : 3,
+                "year" : 1994
+        }
+}
+{
+        "_id" : ObjectId("6095d0942117d2fda1f664a9"),
+        "name" : "Consuelo",
+        "home_state" : "Alabama",
+        "lucky_number" : 23,
+        "birthday" : {
+                "month" : 12,
+                "day" : 8,
+                "year" : 1988
+        }
+}
+
+> db.students.find({$or:[{home_state:'Santiago'},{home_state:'Washington'}]}).pretty()
+> db.estudiantes.find({$or:[home_state:'Santiago'},{home_state:'Washington'}]}).pretty()
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:36
+> db.estudiantes.find({$or:[{home_state:'Santiago'},{home_state:'Washington'}]}).pretty()
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a6"),
+        "name" : "Pablo",
+        "home_state" : "Washington",
+        "lucky_number" : 2,
+        "birthday" : {
+                "month" : 2,
+                "day" : 25,
+                "year" : 1995
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a7"),
+        "name" : "Diego",
+        "home_state" : "Washington",
+        "lucky_number" : 7,
+        "birthday" : {
+                "month" : 4,
+                "day" : 5,
+                "year" : 1982
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a8"),
+        "name" : "Maria",
+        "home_state" : "Santiago",
+        "lucky_number" : 7,
+        "birthday" : {
+                "month" : 8,
+                "day" : 3,
+                "year" : 1994
+        }
+}
+> db.estudiantes.find({lucky_number: {$gt:3}}).pretty()
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a5"),
+        "name" : "Francisco",
+        "home_state" : "Londres",
+        "lucky_number" : 4,
+        "birthday" : {
+                "month" : 8,
+                "day" : 30,
+                "year" : 1994
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a7"),
+        "name" : "Diego",
+        "home_state" : "Washington",
+        "lucky_number" : 7,
+        "birthday" : {
+                "month" : 4,
+                "day" : 5,
+                "year" : 1982
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a8"),
+        "name" : "Maria",
+        "home_state" : "Santiago",
+        "lucky_number" : 7,
+        "birthday" : {
+                "month" : 8,
+                "day" : 3,
+                "year" : 1994
+        }
+}
+{
+        "_id" : ObjectId("6095d0942117d2fda1f664a9"),
+        "name" : "Consuelo",
+        "home_state" : "Alabama",
+        "lucky_number" : 23,
+        "birthday" : {
+                "month" : 12,
+                "day" : 8,
+                "year" : 1988
+        }
+}
+> db.estudiantes.find({lucky_number: {$lt:10}}).pretty()
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a5"),
+        "name" : "Francisco",
+        "home_state" : "Londres",
+        "lucky_number" : 4,
+        "birthday" : {
+                "month" : 8,
+                "day" : 30,
+                "year" : 1994
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a6"),
+        "name" : "Pablo",
+        "home_state" : "Washington",
+        "lucky_number" : 2,
+        "birthday" : {
+                "month" : 2,
+                "day" : 25,
+                "year" : 1995
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a7"),
+        "name" : "Diego",
+        "home_state" : "Washington",
+        "lucky_number" : 7,
+        "birthday" : {
+                "month" : 4,
+                "day" : 5,
+                "year" : 1982
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a8"),
+        "name" : "Maria",
+        "home_state" : "Santiago",
+        "lucky_number" : 7,
+        "birthday" : {
+                "month" : 8,
+                "day" : 3,
+                "year" : 1994
+        }
+}
+> db.estudiantes.find({$and:[{lucky_number: {$gt:1}},{lucky_number: {$lte:9}}]}).pretty()
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a5"),
+        "name" : "Francisco",
+        "home_state" : "Londres",
+        "lucky_number" : 4,
+        "birthday" : {
+                "month" : 8,
+                "day" : 30,
+                "year" : 1994
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a6"),
+        "name" : "Pablo",
+        "home_state" : "Washington",
+        "lucky_number" : 2,
+        "birthday" : {
+                "month" : 2,
+                "day" : 25,
+                "year" : 1995
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a7"),
+        "name" : "Diego",
+        "home_state" : "Washington",
+        "lucky_number" : 7,
+        "birthday" : {
+                "month" : 4,
+                "day" : 5,
+                "year" : 1982
+        }
+}
+{
+        "_id" : ObjectId("6095d0932117d2fda1f664a8"),
+        "name" : "Maria",
+        "home_state" : "Santiago",
+        "lucky_number" : 7,
+        "birthday" : {
+                "month" : 8,
+                "day" : 3,
+                "year" : 1994
+        }
+}
+> db.estudiantes.update({}, {$set: {intereses: ['coding','brunch','MongoDB']}}, false, true)
+WriteResult({ "nMatched" : 5, "nUpserted" : 0, "nModified" : 5 })
+> db.estudiantes.update({name:'Francisco'},{$push:{intereses: 'basketball'}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.estudiantes.update({name:'Maria'},{$push:{intereses: 'emprendimiento'}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.estudiantes.update({name:'Consueo'},{$push:{intereses: 'arte'}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.estudiantes.update({name:'Pablo'},{$push:{intereses: 'relaciones internacionales'}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.estudiantes.update({name:''Diego},{$push:{intereses: 'salud'}})
+uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:30
+> db.estudiantes.update({name:'Diego'},{$push:{intereses: 'impuestos'}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.estudiantes.remove({name:'Diego'},{intereses:'impuestos'})
+WriteResult({ "nRemoved" : 1 })
+> db.estudiantes.remove({home_state:'California'})
+WriteResult({ "nRemoved" : 0 })
+> db.estudiantes.remove({home_state:'Washington'})
+WriteResult({ "nRemoved" : 1 })
+> db.estudiantes.remove({name:'Diego'})
+WriteResult({ "nRemoved" : 0 })
+> db.estudiantes.remove({name:'Francisco'})
+WriteResult({ "nRemoved" : 1 })
+> db.estudiantes.remove({lucky_number:{$gte:5}},true)
+WriteResult({ "nRemoved" : 1 })
+> db.estudiantes.update({}, {$set: {number_of_belts:0}}, false, true)
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.estudiantes.update({home_state:'Washington'}, {$inc: {number_of_belts:1}}, false, true)
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.estudiantes.update({},{$rename:{'number_of_belts': 'belts_earned'}},false,true)
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.estudiantes.update({},{$unset:{lucky_number: ''}},false,true)
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.estudiantes.update({},{$currentDate:{updated_on: true}},false,true)
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> > use myFirstDB
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> switched to db myFirstDB
+uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:9
+> > db.createCollection('estudiantes')
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> { "ok" : 1 }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):1:7
+> > db.estudiantes.insert({name:'Francisco', home_state:'Londres',lucky_number:4, birthday: {month:8,day:30,year:1994}})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nInserted" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.insert({name:'Pablo', home_state:'Washington',lucky_number:2, birthday: {month:2,day:25,year:1995}})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nInserted" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.insert({name:'Diego', home_state:'Washington',lucky_number:7, birthday: {month:4,day:5,year:1982}})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nInserted" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.insert({name:'Maria', home_state:'Santiago',lucky_number:7, birthday: {month:8,day:3,year:1994}})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nInserted" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.insert({name:'Consuelo', home_state:'Alabama',lucky_number:23, birthday: {month:12,day:8,year:1988}})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nInserted" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.students.find().pretty()
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> > db.studantes.find({}).pretty()
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> > db.estudiantes.find().pretty()
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a5"),
+...         "name" : "Francisco",
+...         "home_state" : "Londres",
+...         "lucky_number" : 4,
+...         "birthday" : {
+...                 "month" : 8,
+...                 "day" : 30,
+...                 "year" : 1994
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a6"),
+...         "name" : "Pablo",
+...         "home_state" : "Washington",
+...         "lucky_number" : 2,
+...         "birthday" : {
+...                 "month" : 2,
+...                 "day" : 25,
+...                 "year" : 1995
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a7"),
+...         "name" : "Diego",
+...         "home_state" : "Washington",
+...         "lucky_number" : 7,
+...         "birthday" : {
+...                 "month" : 4,
+...                 "day" : 5,
+...                 "year" : 1982
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a8"),
+...         "name" : "Maria",
+...         "home_state" : "Santiago",
+...         "lucky_number" : 7,
+...         "birthday" : {
+...                 "month" : 8,
+...                 "day" : 3,
+...                 "year" : 1994
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0942117d2fda1f664a9"),
+...         "name" : "Consuelo",
+...         "home_state" : "Alabama",
+...         "lucky_number" : 23,
+...         "birthday" : {
+...                 "month" : 12,
+...                 "day" : 8,
+...                 "year" : 1988
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> > db.students.find({$or:[{home_state:'California'},{home_state:'Washington'}]}).pretty()
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> > db.students.find({$or:[{home_state:'Santiago'},{home_state:'Washington'}]}).pretty()
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> > db.estudiantes.find({$or:[home_state:'Santiago'},{home_state:'Washington'}]}).pretty()
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> uncaught exception: SyntaxError: missing ] after element list :
+uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:9
+> @(shell):1:36
+uncaught exception: SyntaxError: illegal character :
+@(shell):1:0
+> > db.estudiantes.find({$or:[{home_state:'Santiago'},{home_state:'Washington'}]}).pretty()
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a6"),
+...         "name" : "Pablo",
+...         "home_state" : "Washington",
+...         "lucky_number" : 2,
+...         "birthday" : {
+...                 "month" : 2,
+...                 "day" : 25,
+...                 "year" : 1995
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a7"),
+...         "name" : "Diego",
+...         "home_state" : "Washington",
+...         "lucky_number" : 7,
+...         "birthday" : {
+...                 "month" : 4,
+...                 "day" : 5,
+...                 "year" : 1982
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a8"),
+...         "name" : "Maria",
+...         "home_state" : "Santiago",
+...         "lucky_number" : 7,
+...         "birthday" : {
+...                 "month" : 8,
+...                 "day" : 3,
+...                 "year" : 1994
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> > db.estudiantes.find({lucky_number: {$gt:3}}).pretty()
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a5"),
+...         "name" : "Francisco",
+...         "home_state" : "Londres",
+...         "lucky_number" : 4,
+...         "birthday" : {
+...                 "month" : 8,
+...                 "day" : 30,
+...                 "year" : 1994
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a7"),
+...         "name" : "Diego",
+...         "home_state" : "Washington",
+...         "lucky_number" : 7,
+...         "birthday" : {
+...                 "month" : 4,
+...                 "day" : 5,
+...                 "year" : 1982
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a8"),
+...         "name" : "Maria",
+...         "home_state" : "Santiago",
+...         "lucky_number" : 7,
+...         "birthday" : {
+...                 "month" : 8,
+...                 "day" : 3,
+...                 "year" : 1994
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0942117d2fda1f664a9"),
+...         "name" : "Consuelo",
+...         "home_state" : "Alabama",
+...         "lucky_number" : 23,
+...         "birthday" : {
+...                 "month" : 12,
+...                 "day" : 8,
+...                 "year" : 1988
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> > db.estudiantes.find({lucky_number: {$lt:10}}).pretty()
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a5"),
+...         "name" : "Francisco",
+...         "home_state" : "Londres",
+...         "lucky_number" : 4,
+...         "birthday" : {
+...                 "month" : 8,
+...                 "day" : 30,
+...                 "year" : 1994
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a6"),
+...         "name" : "Pablo",
+...         "home_state" : "Washington",
+...         "lucky_number" : 2,
+...         "birthday" : {
+...                 "month" : 2,
+...                 "day" : 25,
+...                 "year" : 1995
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a7"),
+...         "name" : "Diego",
+...         "home_state" : "Washington",
+...         "lucky_number" : 7,
+...         "birthday" : {
+...                 "month" : 4,
+...                 "day" : 5,
+...                 "year" : 1982
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a8"),
+...         "name" : "Maria",
+...         "home_state" : "Santiago",
+...         "lucky_number" : 7,
+...         "birthday" : {
+...                 "month" : 8,
+...                 "day" : 3,
+...                 "year" : 1994
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> > db.estudiantes.find({$and:[{lucky_number: {$gt:1}},{lucky_number: {$lte:9}}]}).pretty()
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a5"),
+...         "name" : "Francisco",
+...         "home_state" : "Londres",
+...         "lucky_number" : 4,
+...         "birthday" : {
+...                 "month" : 8,
+...                 "day" : 30,
+...                 "year" : 1994
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a6"),
+...         "name" : "Pablo",
+...         "home_state" : "Washington",
+...         "lucky_number" : 2,
+...         "birthday" : {
+...                 "month" : 2,
+...                 "day" : 25,
+...                 "year" : 1995
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a7"),
+...         "name" : "Diego",
+...         "home_state" : "Washington",
+...         "lucky_number" : 7,
+...         "birthday" : {
+...                 "month" : 4,
+...                 "day" : 5,
+...                 "year" : 1982
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> {
+...         "_id" : ObjectId("6095d0932117d2fda1f664a8"),
+...         "name" : "Maria",
+...         "home_state" : "Santiago",
+...         "lucky_number" : 7,
+...         "birthday" : {
+...                 "month" : 8,
+...                 "day" : 3,
+...                 "year" : 1994
+...         }
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:14
+> > db.estudiantes.update({}, {$set: {intereses: ['coding','brunch','MongoDB']}}, false, true)
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nMatched" : 5, "nUpserted" : 0, "nModified" : 5 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.update({name:'Francisco'},{$push:{intereses: 'basketball'}})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.update({name:'Maria'},{$push:{intereses: 'emprendimiento'}})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.update({name:'Consueo'},{$push:{intereses: 'arte'}})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.update({name:'Pablo'},{$push:{intereses: 'relaciones internacionales'}})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.update({name:''Diego},{$push:{intereses: 'salud'}})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> uncaught exception: SyntaxError: missing } after property list :
+uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:9
+> @(shell):1:30
+uncaught exception: SyntaxError: illegal character :
+@(shell):1:0
+> > db.estudiantes.update({name:'Diego'},{$push:{intereses: 'impuestos'}})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.remove({name:'Diego'},{intereses:'impuestos'})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nRemoved" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.remove({home_state:'California'})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nRemoved" : 0 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.remove({home_state:'Washington'})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nRemoved" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.remove({name:'Diego'})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nRemoved" : 0 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.remove({name:'Francisco'})
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nRemoved" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.remove({lucky_number:{$gte:5}},true)
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nRemoved" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.update({}, {$set: {number_of_belts:0}}, false, true)
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.update({home_state:'Washington'}, {$inc: {number_of_belts:1}}, false, true)
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.update({},{$rename:{'number_of_belts': 'belts_earned'}},false,true)
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.update({},{$unset:{lucky_number: ''}},false,true)
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> > db.estudiantes.update({},{$currentDate:{updated_on: true}},false,true)
+uncaught exception: SyntaxError: expected expression, got '>' :
+@(shell):1:0
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
